@@ -1,4 +1,5 @@
 import 'package:epub_view/epub_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemChrome, SystemUiOverlayStyle;
 
@@ -77,6 +78,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late EpubController _epubReaderController;
 
+  int? index;
+  String? cfi;
   @override
   void initState() {
     _epubReaderController = EpubController(
@@ -108,9 +111,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.save_alt),
+              icon: const Icon(Icons.open_in_browser),
               color: Colors.white,
-              onPressed: () => _showCurrentEpubCfi(context),
+              onPressed: openPosition,
+            ),
+            IconButton(
+              icon: const Icon(Icons.save),
+              color: Colors.white,
+              onPressed: savePosition,
             ),
           ],
         ),
@@ -126,21 +134,57 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
 
-  void _showCurrentEpubCfi(context) {
-    final cfi = _epubReaderController.generateEpubCfi();
-
-    if (cfi != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(cfi),
-          action: SnackBarAction(
-            label: 'GO',
+  void savePosition() {
+    showDialog(context: context, builder: (context) => SimpleDialog(
+        children: [
+          SimpleDialogOption(
             onPressed: () {
-              _epubReaderController.gotoEpubCfi(cfi);
+              cfi = _epubReaderController.generateEpubCfi();
+              if (kDebugMode) {
+                print(cfi);
+              }
             },
+            child: const Text("to ePubCfi"),
           ),
-        ),
-      );
-    }
+          SimpleDialogOption(
+            onPressed: () {
+              index = _epubReaderController.generateParagraphIndex();
+              if (kDebugMode) {
+                print(index);
+              }
+            },
+            child: const Text("to index"),
+          ),
+        ],
+        title: const Text("Save"),
+      ),
+    );
+  }
+
+  void openPosition() {
+    showDialog(context: context, builder: (context) => SimpleDialog(
+        children: [
+          SimpleDialogOption(
+            onPressed: () {
+              _epubReaderController.gotoEpubCfi(cfi!);
+              if (kDebugMode) {
+                print(cfi);
+              }
+            },
+            child: const Text("from ePubCfi"),
+          ),
+          SimpleDialogOption(
+            onPressed: () {
+              _epubReaderController.scrollTo(index: index!);
+              if (kDebugMode) {
+                print(index);
+              }
+            },
+            child: const Text("from index"),
+          ),
+        ],
+        title: const Text("Open"),
+      ),
+    );
   }
 }
