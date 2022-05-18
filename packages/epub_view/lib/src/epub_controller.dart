@@ -56,6 +56,12 @@ class EpubController {
     );
   }
 
+  int? generateParagraphIndex() => _epubViewState?._getAbsParagraphIndexBy(
+        positionIndex: _epubViewState?._currentValue?.position.index ?? 0,
+        trailingEdge: _epubViewState?._currentValue?.position.itemTrailingEdge,
+        leadingEdge: _epubViewState?._currentValue?.position.itemLeadingEdge,
+      );
+
   String? generateEpubCfi() => _epubViewState?._epubCfiReader?.generateCfi(
         book: _document,
         chapter: _epubViewState?._currentValue?.chapter,
