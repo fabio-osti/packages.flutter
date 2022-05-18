@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:collection/collection.dart' show IterableExtension;
@@ -366,7 +367,7 @@ class _EpubViewState extends State<EpubView> {
 
   Widget _buildLoaded(BuildContext context) {
     return ScrollablePositionedList.builder(
-      initialScrollIndex: _epubCfiReader!.paragraphIndexByCfiFragment ?? 0,
+      initialScrollIndex: max(_controller.index ?? 0, _epubCfiReader?.paragraphIndexByCfiFragment ?? 0),
       itemCount: _paragraphs.length,
       itemScrollController: _itemScrollController,
       itemPositionsListener: _itemPositionListener,

@@ -1,13 +1,16 @@
 part of 'ui/epub_view.dart';
 
 class EpubController {
+
   EpubController({
     required this.document,
     this.epubCfi,
+    this.index
   });
 
   Future<EpubBook> document;
   final String? epubCfi;
+  final int? index;
 
   _EpubViewState? _epubViewState;
   List<EpubViewChapter>? _cacheTableOfContents;
