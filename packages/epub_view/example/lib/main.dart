@@ -83,12 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _epubReaderController = EpubController(
-      document:
-          EpubDocument.openAsset('assets/New-Findings-on-Shirdi-Sai-Baba.epub'),
+      document: EpubDocument.openAsset(
+        'assets/asimov-genetic-effects-of-radiation.epub',
+      ),
+      index: 23,
+      //
+      // document: EpubDocument.openAsset(
+      //   'New-Findings-on-Shirdi-Sai-Baba.epub',
+      // )
+      //
+      // document: EpubDocument.openAsset(
+      //   'assets/book.epub',
+      // )
       // epubCfi:
-      //     'epubcfi(/6/26[id4]!/4/2/2[id4]/22)', // book.epub Chapter 3 paragraph 10
+      //   'epubcfi(/6/26[id4]!/4/2/2[id4]/22)', // book.epub Chapter 3 paragraph 10
+      //
+      // document: EpubDocument.openAsset(
+      //   'assets/book_2.epub',
+      // )
       // epubCfi:
-      //     'epubcfi(/6/6[chapter-2]!/4/2/1612)', // book_2.epub Chapter 16 paragraph 3
+      //   'epubcfi(/6/6[chapter-2]!/4/2/1612)', // book_2.epub Chapter 16 paragraph 3
     );
     super.initState();
   }
