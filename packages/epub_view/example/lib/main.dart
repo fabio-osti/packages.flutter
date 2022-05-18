@@ -135,7 +135,9 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
   void savePosition() {
-    showDialog(context: context, builder: (context) => SimpleDialog(
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
         children: [
           SimpleDialogOption(
             onPressed: () {
@@ -143,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (kDebugMode) {
                 print(cfi);
               }
+              Navigator.pop(context);
             },
             child: const Text("to ePubCfi"),
           ),
@@ -152,6 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (kDebugMode) {
                 print(index);
               }
+              Navigator.pop(context);
             },
             child: const Text("to index"),
           ),
@@ -162,7 +166,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void openPosition() {
-    showDialog(context: context, builder: (context) => SimpleDialog(
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
         children: [
           SimpleDialogOption(
             onPressed: () {
@@ -170,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (kDebugMode) {
                 print(cfi);
               }
+              Navigator.pop(context);
             },
             child: const Text("from ePubCfi"),
           ),
@@ -179,6 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (kDebugMode) {
                 print(index);
               }
+              Navigator.pop(context);
             },
             child: const Text("from index"),
           ),
